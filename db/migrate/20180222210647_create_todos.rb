@@ -2,7 +2,8 @@ class CreateTodos < ActiveRecord::Migration[5.1]
   def change
     create_table :todos do |t|
     	t.string :name
-			add_foreign_key :todos, :projects
+    	t.integer :project_id
+			add_foreign_key :project_id, :projects
 
       t.timestamps
     end
