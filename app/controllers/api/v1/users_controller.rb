@@ -4,21 +4,15 @@ class Api::V1::UsersController < Api::V1::BaseController
 	end
 
 	def show 
-		user = User.find(params[:id])
+		user = User.find(params[:user][:email])
+		user.valid_password?(params[:user][:password])
 		respond_with user
 	end  
 
 	def create
-		# @user.user_create(user_params)
 		user_obj = User.new(user_params)
 		respond_with :api, :v1, user_obj.create_user
-		# respond_with :api, :v1, User.create(user_params) 
 	end 
-
-	# def create
-	#  	@user.user_create(user_params)
-	# 	byebug
-	# end
 
 	def destroy 
 		respond_with User.destroy(params[:id]) 
