@@ -1,14 +1,13 @@
-class User < ActiveRecord::Base
-	include Bcrypt
+require 'bcrypt'
 
-  def password=(password_hash)
-  	bybug
-    self.password_digest = BCrypt::Password.create(password)
-  end
+class User < ApplicationRecord
 
-  def is_password?(password_hash)
-    BCrypt::Password.new(self.password_digest) == password
-  end
+	def create_user
+
+		password = BCrypt::Password.create self.password_hash
+
+		User.create(name: self.name, email: self.email, password_hash: password) 
+
+	end
+
 end
-
-

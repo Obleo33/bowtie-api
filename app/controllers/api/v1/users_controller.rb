@@ -9,8 +9,16 @@ class Api::V1::UsersController < Api::V1::BaseController
 	end  
 
 	def create
-		respond_with :api, :v1, User.create(user_params) 
+		# @user.user_create(user_params)
+		user_obj = User.new(user_params)
+		respond_with :api, :v1, user_obj.create_user
+		# respond_with :api, :v1, User.create(user_params) 
 	end 
+
+	# def create
+	#  	@user.user_create(user_params)
+	# 	byebug
+	# end
 
 	def destroy 
 		respond_with User.destroy(params[:id]) 
